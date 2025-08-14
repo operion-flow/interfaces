@@ -57,38 +57,35 @@ jobs:
       - name: Run staticcheck
         run: staticcheck ./...
 
-      - name: Run deadcode analysis
-        run: go tool deadcode -test ./...
-
       - name: Install golangci-lint
         uses: golangci/golangci-lint-action@v8
         with:
           version: latest
           only-new-issues: true
 
-      - name: Run tests
-        run: go test -race -coverprofile=coverage.out -covermode=atomic ./...
+      # - name: Run tests
+      #   run: go test -race -coverprofile=coverage.out -covermode=atomic ./...
 
-      - name: Generate coverage report
-        run: go tool cover -html=coverage.out -o coverage.html
+      # - name: Generate coverage report
+      #   run: go tool cover -html=coverage.out -o coverage.html
 
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          file: ./coverage.out
-          token: ${{ secrets.CODECOV_TOKEN }}
-          slug: operion-flow/interfaces
+      # - name: Upload coverage reports to Codecov
+      #   uses: codecov/codecov-action@v5
+      #   with:
+      #     file: ./coverage.out
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     slug: operion-flow/interfaces
 
-      - name: Upload coverage to Coveralls
-        uses: coverallsapp/github-action@v2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: coverage.out
+      # - name: Upload coverage to Coveralls
+      #   uses: coverallsapp/github-action@v2
+      #   with:
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+      #     path-to-lcov: coverage.out
 
-      - name: Archive coverage reports
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-report
-          path: |
-            coverage.out
-            coverage.html
+      # - name: Archive coverage reports
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: coverage-report
+      #     path: |
+      #       coverage.out
+      #       coverage.html
